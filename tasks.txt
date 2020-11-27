@@ -1,5 +1,1 @@
- [x] cica
- [x] kutya
- [x] a
- [x] b
- [ ] kecke
+ [ ] kutya

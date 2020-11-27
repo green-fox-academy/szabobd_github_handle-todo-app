@@ -1,4 +1,4 @@
-.idea
+*.idea
 bizti.txt
 fff.py
 hh.py

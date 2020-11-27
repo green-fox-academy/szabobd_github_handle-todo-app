@@ -19,15 +19,23 @@ def print_usage():
 
 
 def print_count():
-    list_undone_task()
-    with open('tasks.txt', 'r') as in_file1, open('undone_tasks.txt', 'r') as in_file2:
-        print('You have ' + str(len(list(in_file1))) + ' todos, from which ' + str(len(list(in_file2))) + ' are undone')
+    try:
+        list_undone_task()
+        with open('tasks.txt', 'r') as in_file1, open('undone_tasks.txt', 'r') as in_file2:
+            print('You have ' + str(len(list(in_file1))) + ' todos, from which ' + str(len(list(in_file2))) + ' are undone')
+
+    except FileNotFoundError:
+        print('You have no todos yet')
 
 
 def list_task():
-    with open('tasks.txt', 'r') as in_file:
-        for position, line in enumerate(in_file):
-            print(str(position + 1) + ' -' + str(line))
+    try:
+        with open('tasks.txt', 'r') as in_file:
+            for position, line in enumerate(in_file):
+                print(str(position + 1) + ' -' + str(line))
+
+    except FileNotFoundError:
+        print('You need to ask some tasks first')
 
 
 def list_undone_task():
@@ -101,11 +109,14 @@ elif sys.argv[1] == '-l':
         list_task()
 
 elif sys.argv[1] == '-u':
-    if os.stat('tasks.txt').st_size != 0:
-        list_undone_task()
-        print_undone_task()
-    elif os.stat('tasks.txt').st_size == 0:
-        print('You did it, champ!')
+    try:
+        if os.stat('tasks.txt').st_size != 0:
+            list_undone_task()
+            print_undone_task()
+        elif os.stat('tasks.txt').st_size == 0:
+            print('You did it, champ!')
+    except FileNotFoundError:
+        print('You need to add some tasks first')
 
 elif sys.argv[1] == '-a':
     if len(sys.argv) == 2:
@@ -126,7 +137,3 @@ elif sys.argv[1] == '-r':
 
 elif sys.argv[1] != '-l' or 'u' or '-r' or '-a' or '-c':
     print('Invalid argument, please todo.py and see the available arguments!')
-
-
-# elif
-#    print('Unsupported argument')
