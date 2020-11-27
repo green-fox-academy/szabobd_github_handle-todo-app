@@ -1,0 +1,6 @@
+.idea
+bizti.txt
+fff.py
+hh.py
+jjj.py
+my-file.txt
